@@ -58,35 +58,7 @@
             align-items: center;
             margin-top: 20px;
         }
-    </style>
-    <script>
-        function verificarSenha() {
-            var senhaInserida = document.getElementById("senha").value;
-            var senhasAceitas = ["123456", "14725836", "97432345"];
-
-            if (senhasAceitas.includes(senhaInserida)) {
-                document.getElementById("mensagem").textContent = "Obtendo entrada..."; 
-                setTimeout(function() {
-                    document.getElementById("mensagem").textContent = ""; 
-                    document.getElementById("entrada").style.display = "block"; 
-                    setTimeout(function() {
-                        var entrada = Math.floor(Math.random() * 35) + 1;
-                        document.getElementById("entrada").innerHTML = "Entrada: " + entrada + " e Vizinhos🎯";
-                        document.getElementById("mensagem").textContent = ""; 
-
-                        var resultadoSound = document.getElementById("resultado-sound");
-                        resultadoSound.play();
-                    }, 1000);
-
-                    setTimeout(function() {
-                        document.getElementById("entrada").style.display = "none"; 
-                    }, 10000);
-                }, 5000); 
-            } else {
-                document.getElementById("mensagem").textContent = "Senha incorreta. Tente novamente.";
-            }
-        }
-    </script>
+   </style>
 </head>
 <body>
     <div class="logo">
@@ -114,6 +86,33 @@
     <div class="botoes">
         <a href="https://www.sssgame.com?code=426023" target="_blank"><button id="botao-cadastrar">Cadastrar</button></a>
     </div>
-    <audio id="resultado-sound" src="https://drive.google.com/file/d/1jMKhCqAwg8PCL52N0Y1sMQaMeuCAKW-H/view?usp=drivesdk" preload="auto"></audio>
+    <a href="https://drive.google.com/file/d/1hqYUde2CzWrIk1q3MBLpBqa0NMCZu4QI/view?usp=drivesdk" target="_blank"><button id="botao-video-aula">Vídeo Aula</button></a>
+    
+    <!-- Script para verificar a senha e exibir entrada -->
+    <script>
+        function verificarSenha() {
+            var senhaInserida = document.getElementById("senha").value;
+            var senhasAceitas = ["123456", "14725836", "97432345"]; // Adicione as senhas válidas aqui
+
+            if (senhasAceitas.includes(senhaInserida)) {
+                document.getElementById("mensagem").textContent = "Obtendo entrada...";
+                setTimeout(function() {
+                    document.getElementById("mensagem").textContent = "";
+                    document.getElementById("entrada").style.display = "block";
+                    setTimeout(function() {
+                        var entrada = Math.floor(Math.random() * 35) + 1;
+                        document.getElementById("entrada").innerHTML = "Entrada: " + entrada + " e Vizinhos🎯";
+                        document.getElementById("mensagem").textContent = "";
+                    }, 1000);
+
+                    setTimeout(function() {
+                        document.getElementById("entrada").style.display = "none";
+                    }, 10000);
+                }, 5000);
+            } else {
+                document.getElementById("mensagem").textContent = "Senha incorreta. Tente novamente.";
+            }
+        }
+    </script>
 </body>
     </html>
