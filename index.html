@@ -1,444 +1,98 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>IA MONEY ROULETTE</title>
-  <style>
- 
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #121212; /* Cor de fundo escura */
-      color: #FFFFFF; /* Cor do texto */
-    }
+    <title>IA roleta 3.0</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        #entrada {
+            font-size: 24px;
+            margin-top: 20px;
+            display: none; /* Inicialmente oculto */
+        }
+        #obter-entrada {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 40px; /* Maior margem inferior */
+        }
+        #botao-cadastrar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #roleta-select {
+            color: white;
+            background-color: #333;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .redes-sociais {
+            margin-top: 40px;
+        }
+        .redes-sociais a {
+            margin: 0 10px;
+        }
+        .logo {
+            margin-top: -60px; /* Ajuste a margem superior conforme necessário */
+        }
+        .botoes {
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function obterEntrada() {
+            document.getElementById("entrada").style.display = "block"; // Exibe a entrada
+            document.getElementById("entrada").innerHTML = "Obtendo entrada...";
+            setTimeout(function() {
+                var entrada = Math.floor(Math.random() * 35) + 1;
+                document.getElementById("entrada").innerHTML = "Entrada: " + entrada + " vizinhos";
+            }, 5000); // 5 segundos
 
-    .circle {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      line-height: 50px;
-      margin: 5px;
-    }
-
-    .table {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .green-bg {
-      background-color: #009900;
-      color: #FFFFFF; /* Cor do texto no círculo verde */
-    }
-
-    .red-bg {
-      background-color: #FF0000;
-      color: #FFFFFF; /* Cor do texto no círculo vermelho */
-    }
-
-    .black-bg {
-      background-color: #000000;
-      color: #FFFFFF; /* Cor do texto no círculo preto */
-    }
-
-    .yellow-bg {
-      background-color: #FFD700;
-      color: #000000; /* Cor do texto no círculo amarelo */
-    }
-
-    .blue-bg {
-      background-color: #0000FF;
-      color: #FFFFFF; /* Cor do texto no círculo azul */
-    }
-
-    .purple-bg {
-      background-color: #800080;
-      color: #FFFFFF; /* Cor do texto no círculo roxo */
-    }
-
-    .button {
-      background-color: #4CAF50;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      text-align: center;
-      text-decoration: none;
-      font-size: 16px;
-      margin: 10px;
-      cursor: pointer;
-    }
-
-    .message {
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-
-    .coin-img {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 10px;
-    }
-
-    .results-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    /* Novo estilo para ocultar resultados */
-    .hidden {
-      display: none;
-    }
-
-    /* Novo estilo para destacar o resultado da calculadora Par ou Ímpar */
-    .blue-bg-result {
-      background-color: #0000FF;
-      color: #FFFFFF; /* Cor do texto na faixa azul */
-      font-size: 20px;
-      padding: 5px;
-      margin-top: 10px;
-    }
-
-    /* Novo estilo para o resultado "VERMELHO" */
-    .resultado-vermelho {
-      background-color: #FF0000;
-      color: #FFFFFF;
-      font-size: 20px;
-      padding: 5px;
-      margin-top: 10px;
-    }
-
-    /* Novo estilo para o resultado "PRETO" */
-    .resultado-preto {
-      background-color: #000000;
-      color: #FFFFFF;
-      font-size: 20px;
-      padding: 5px;
-      margin-top: 10px;
-    }
-
-    /* Estilo para o resultado "ALTOS" com fundo cinza */
-    .gray-bg-result-altos {
-      background-color: #808080;
-      color: #FFFFFF;
-      font-size: 20px;
-      padding: 5px;
-      margin-top: 10px;
-    }
-
-    /* Estilo para o resultado "BAIXOS" com fundo cinza */
-    .gray-bg-result-baixos {
-      background-color: #808080;
-      color: #FFFFFF;
-      font-size: 20px;
-      padding: 5px;
-      margin-top: 10px;
-    }
-
-    /* Estilo para o resultado "PAR" com fundo cinza */
-    .gray-bg-result-par {
-      background-color: #808080;
-      color: #FFFFFF;
-      font-size: 20px;
-      padding: 5px;
-      margin-top: 10px;
-    }
-
-    /* Estilo para o resultado "ÍMPAR" com fundo cinza */
-    .gray-bg-result-impar {
-      background-color: #808080;
-      color: #FFFFFF;
-      font-size: 20px;
-      padding: 5px;
-      margin-top: 10px;
-    }
-
-    /* Novo estilo para o emoji das mãos */
-    .hand-emoji {
-      font-size: 24px;
-      margin-left: 5px;
-    }
-
-    /* Adicionar estilos para ajustar o tamanho do texto em diferentes dispositivos */
-    @media only screen and (max-width: 600px) {
-      .circle {
-        font-size: 14px;
-        line-height: 40px;
-        width: 40px;
-        height: 40px;
-      }
-
-      .button {
-        font-size: 14px;
-        padding: 8px 16px;
-      }
-
-      .message {
-        font-size: 16px;
-      }
-
-      .results-container {
-        margin-top: 20px;
-      }
-    }
-
-    /* Style for the logo image */
-    .logo-img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      margin-right: 10px;
-    } /* ... (estilos das cores dos círculos, mensagem, etc.) ... */
-
-    /* Estilo para os botões */
-    .button {
-      background-color: #4CAF50;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      text-align: center;
-      text-decoration: none;
-      font-size: 16px;
-      margin: 10px;
-      cursor: pointer;
-      border-radius: 4px;
-      transition: background-color 0.3s;
-    }
-
-    /* Estilo para o botão quando o cursor estiver sobre ele */
-    .button:hover {
-      background-color: #45a049;
-    }
-
-    /* Estilo para o botão quando estiver pressionado */
-    .button:active {
-      background-color: #3e8e41;
-    }
-
-    /* Estilo para o botão "ENTRAR LIGHTNING ROULETTE" */
-    .button.lightning-roulette {
-      background-color: #f39c12;
-    }
-
-    /* Estilo para o botão "ENTRAR LIGHTNING ROULETTE" quando o cursor estiver sobre ele */
-    .button.lightning-roulette:hover {
-      background-color: #e08e0b;
-    }
-
-    /* Estilo para o botão "ENTRAR LIGHTNING ROULETTE" quando estiver pressionado */
-    .button.lightning-roulette:active {
-      background-color: #d6890a;
-    }
-
-    /* Estilo para o botão "ENTRAR XXXTREME ROULETTE" */
-    .button.xxx-roulette {
-      background-color: #e74c3c;
-    }
-
-    /* Estilo para o botão "ENTRAR XXXTREME ROULETTE" quando o cursor estiver sobre ele */
-    .button.xxx-roulette:hover {
-      background-color: #d73a2c;
-    }/* Estilo para a imagem de fundo semi-transparente */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('https://designersbrasileiros.com.br/wp-content/uploads/2022/08/cassino.webp');
-      opacity: 0.3; /* Ajuste a opacidade aqui (0.0 a 0.0) */
-      z-index: -1;
-
-
-    /* Estilo para o botão "ENTRAR XXXTREME ROULETTE" quando estiver pressionado */
-    .button.xxx-roulette:active {
-      background-color: #c72e23;
-    
-    }
-  /* Estilo opcional para ajustar o tamanho do iframe automaticamente */
-    iframe {
-      width: 50%;
-      height: 800;
-  </style>
+            setTimeout(function() {
+                document.getElementById("entrada").style.display = "none"; // Esconde a entrada
+            }, 20000); // 20 segundos (15s para "Aguarde" + 5s para a próxima entrada)
+        }
+    </script>
 </head>
 <body>
-  <!-- Logo Container -->
-  <div class="logo-container">
-    <!-- Replace "logo.png" with the path to your logo image -->
-    <img class="logo-img" src="https://document-export.canva.com/62AJ8/DAFpXw62AJ8/2/thumbnail/0001.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWDTJW6UD%2F20230724%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230724T234533Z&X-Amz-Expires=16609&X-Amz-Signature=aedeea89c70865df793239ed37341b33b33d65cf0592ca0a2602a9e153286ae7&X-Amz-SignedHeaders=host&response-expires=Tue%2C%2025%20Jul%202023%2004%3A22%3A22%20GMT" alt="Logo">
-<p class="message">Escolha uma roleta:</p>
-<select id="opcoesRoleta">
-  <option value="LIGHTNING ROULETTE">LIGHTNING ROULETTE</option>
-  <option value="INSTANT ROULETTE">INSTANT ROULETTE</option>
-  <option value="AUTO ROULETTE">AUTO ROULETTE</option>
-  <option value="IMMERSIVE ROULETTE">IMMERSIVE ROULETTE</option>
-  <option value="XXXTREME">XXXTREME ROULETTE</option>
-</select>
-  </div><h1>IA MONEY ROULETTE</h1>
-  <p class="message">Clique no botão abaixo para ativar a IA e gerar uma melhor estratégia:</p>
-  <button class="button" onclick="iniciarIA()">LIGAR IA</button>
-  <div class="results-container">
- 
-    <!-- Adicionado novo elemento para mostrar o resultado anterior -->
-    <div class="results hidden" id="resultadoAnterior"></div>
-    <p class="roulette-name" id="nomeRoleta"></p>
-    <div class="table" id="resultado"></div>
-    <!-- Adicionado novo elemento para exibir Par ou Ímpar -->
-    <p class="result-par-imp hidden" id="resultadoParImpar"></p>
-    <!-- Adicionado novo elemento para exibir Altos ou Baixos -->
-    <p class="result-altos-baixos hidden" id="resultadoAltosBaixos"></p>
-    <!-- Adicionado novo elemento para exibir Preto ou Vermelho -->
-    <p class="result-preto-vermelho hidden" id="resultadoPretoVermelho"></p>
-  </div>
-  <p class="message" id="mensagemIA"></p>
-
-<iframe src="https://9f.com/r/PXrGBosV" width="40%" height="600"></iframe>
-
-  <script>
-    function iniciarIA() {
-      const mensagemIAElement = document.getElementById("mensagemIA");
-      mensagemIAElement.innerText = "IA trabalhando...";
-
-      setTimeout(() => {
-        gerarNumerosAleatorios();
-        gerarParImparAleatorio();
-        gerarAltosBaixosAleatorio();
-        gerarPretoVermelhoAleatorio();
-        mensagemIAElement.innerText = "";
-      }, 2000); // 2000 milissegundos = 2 segundos
-    }
-
-    function gerarNumerosAleatorios() {
-      const resultadoElement = document.getElementById("resultado");
-      const resultadoAnteriorElement = document.getElementById("resultadoAnterior");
-      resultadoAnteriorElement.innerHTML = resultadoElement.innerHTML; // Salva o resultado anterior
-
-      resultadoElement.innerHTML = ""; // Limpa o conteúdo anterior
-
-      const nomesRoleta = [
-        "SIGA UM GERENCIAMENTO",
-        "NAO FIQUE MUITO TEMPO ",
-        "MARAVILHA LINDA OPORTUNIDADE",
-        
-      ];
-
-      const min = 0;
-      const max = 36;
-      const quantidadeNumeros = Math.floor(Math.random() * 10) + 6; // Número aleatório entre 8 e 15
-
-      const nomeRoletaElement = document.getElementById("nomeRoleta");
-      nomeRoletaElement.innerText = getRandomArrayElement(nomesRoleta); // Nome da roleta aleatório
-
-      setTimeout(() => {
-        let numerosGerados = [];
-        while (numerosGerados.length < quantidadeNumeros) {
-          const numeroAleatorio = Math.floor(Math.random() * (max - min + 1)) + min;
-          if (!numerosGerados.includes(numeroAleatorio)) {
-            numerosGerados.push(numeroAleatorio);
-          }
-        }
-
-        numerosGerados.sort((a, b) => a - b); // Ordena os números em ordem crescente
-
-        nomeRoletaElement.innerText = ""; // Limpa o nome da roleta
-
-        numerosGerados.forEach((numero) => {
-          let circleClass =
-            numero === 0 ? "green-bg"
-            : numero >= 1 && numero <= 10 ? (numero % 2 === 0 ? "black-bg" : "red-bg")
-            : numero >= 11 && numero <= 18 ? (numero % 2 === 0 ? "red-bg" : "black-bg")
-            : numero >= 19 && numero <= 28 ? (numero % 2 === 0 ? "black-bg" : "red-bg")
-            : numero >= 29 && numero <= 36 ? (numero % 2 === 0 ? "red-bg" : "black-bg")
-            : "purple-bg";
-
-          resultadoElement.innerHTML += `<div class="circle ${circleClass}">${numero}</div>`;
-        });
-
-        // Exibir o resultado anterior por alguns segundos antes de sumir
-        resultadoAnteriorElement.classList.remove("hidden");
-        setTimeout(() => {
-          resultadoAnteriorElement.classList.add("hidden");
-        }, 2000); // 2000 milissegundos = 2 segundos
-
-        // Após 30 segundos, limpa o resultado novamente
-        setTimeout(() => {
-          resultadoElement.innerHTML = "";
-        }, 30000); // 30000 milissegundos = 30 segundos
-      }, 1000); // 1000 milissegundos = 1 segundos
-    }
-
-    function gerarParImparAleatorio() {
-      const resultadoParImparElement = document.getElementById("resultadoParImpar");
-      const resultadoParImpar = Math.random() < 0.5 ? "PAR" : "ÍMPAR";
-
-      resultadoParImparElement.innerText = resultadoParImpar;
-
-      resultadoParImparElement.classList.remove("hidden");
-      resultadoParImparElement.classList.remove("gray-bg-result-par");
-      resultadoParImparElement.classList.remove("gray-bg-result-impar");
-
-      if (resultadoParImpar === "PAR") {
-        resultadoParImparElement.classList.add("gray-bg-result-par");
-      } else {
-        resultadoParImparElement.classList.add("gray-bg-result-impar");
-      }
-
-      // Após 25 segundos, oculta o resultado
-      setTimeout(() => {
-        resultadoParImparElement.classList.add("hidden");
-      }, 25000); // 25000 milissegundos = 25 segundos
-    }
-
-    function gerarAltosBaixosAleatorio() {
-      const resultadoAltosBaixosElement = document.getElementById("resultadoAltosBaixos");
-      const resultadoAltosBaixos = Math.random() < 0.5 ? "ALTOS" : "BAIXOS";
-      resultadoAltosBaixosElement.innerText = resultadoAltosBaixos;
-
-      resultadoAltosBaixosElement.classList.remove("hidden");
-      resultadoAltosBaixosElement.classList.remove("gray-bg-result-altos");
-      resultadoAltosBaixosElement.classList.remove("gray-bg-result-baixos");
-
-      if (resultadoAltosBaixos === "ALTOS") {
-        resultadoAltosBaixosElement.classList.add("gray-bg-result-altos");
-      } else {
-        resultadoAltosBaixosElement.classList.add("gray-bg-result-baixos");
-      }
-
-      // Após 25 segundos, oculta o resultado
-      setTimeout(() => {
-        resultadoAltosBaixosElement.classList.add("hidden");
-      }, 25000); // 25000 milissegundos = 25 segundos
-    }
-
-    function gerarPretoVermelhoAleatorio() {
-      const resultadoPretoVermelhoElement = document.getElementById("resultadoPretoVermelho");
-      const resultadoPretoVermelho = Math.random() < 0.5 ? "PRETO" : "VERMELHO";
-      resultadoPretoVermelhoElement.innerText = resultadoPretoVermelho;
-
-      resultadoPretoVermelhoElement.classList.remove("hidden");
-      resultadoPretoVermelhoElement.classList.remove("resultado-preto");
-      resultadoPretoVermelhoElement.classList.remove("resultado-vermelho");
-
-      if (resultadoPretoVermelho === "PRETO") {
-        resultadoPretoVermelhoElement.classList.add("resultado-preto");
-      } else {
-        resultadoPretoVermelhoElement.classList.add("resultado-vermelho");
-      }
-
-      // Após 25 segundos, oculta o resultado
-      setTimeout(() => {
-        resultadoPretoVermelhoElement.classList.add("hidden");
-      }, 25000); // 25000 milissegundos = 25 segundos
-    }
-
-    function getRandomArrayElement(array) {
-      const randomIndex = Math.floor(Math.random() * array.length);
-      return array[randomIndex];
-    }
-  </script>
+    <div class="logo">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz5PQpt8fn_hrie2m3NUYGXoDjtqwn8wWwzQ&usqp=CAU" alt="Logo" width="150">
+    </div>
+    <h1>IA roleta numeros</h1>
+    <select id="roleta-select">
+        <option value="roleta-ao-vivo">Roleta ao Vivo</option>
+        <option value="mega-roleta">Mega Roleta</option>
+        <option value="roleta-relampago">Roleta Relampago</option>
+        <option value="roleta-lobby">Roleta Lobby</option>
+        <option value="roleta-imersiva">Roleta Imersiva</option>
+        <option value="roleta-rapida">Roleta Rapida</option>
+        <option value="roleta-vip">Roleta VIP</option>
+        <option value="roleta-espanhola">Roleta Espanhola</option>
+        <option value="roleta-momenia">Roleta Momenia</option>
+        <option value="roleta-vip-diamante">Roleta VIP Diamante</option>
+    </select>
+    <div class="botoes">
+        <button id="obter-entrada" onclick="obterEntrada()">Obter Entrada</button>
+        <a href="https://www.sssgame.com?code=426023" target="_blank"><button id="botao-cadastrar">Cadastrar</button></a>
+    </div>
+    <p id="entrada"></p>
 </body>
 </html>
