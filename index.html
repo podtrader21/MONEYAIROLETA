@@ -16,6 +16,10 @@
             margin-top: 20px;
             display: none;
         }
+        #mensagem {
+            color: yellow;
+            font-size: 18px;
+        }
         #obter-entrada {
             background-color: green;
             color: white;
@@ -23,7 +27,7 @@
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
-            margin-bottom: 40px;
+            margin-top: 20px;
         }
         #botao-cadastrar {
             position: fixed;
@@ -49,6 +53,9 @@
             margin-top: -60px;
         }
         .botoes {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             margin-top: 20px;
         }
     </style>
@@ -65,12 +72,13 @@
                     setTimeout(function() {
                         var entrada = Math.floor(Math.random() * 35) + 1;
                         document.getElementById("entrada").innerHTML = "Entrada: " + entrada + " vizinhos";
-                    }, 5000);
+                        document.getElementById("mensagem").textContent = ""; // Limpa novamente a mensagem
+                    }, 3000);
 
                     setTimeout(function() {
                         document.getElementById("entrada").style.display = "none"; // Esconde a entrada
-                    }, 20000);
-                }, 2000); // Espera 2 segundos antes de exibir o resultado
+                    }, 50000);
+                }, 5000); // Espera 2 segundos antes de exibir o resultado
             } else {
                 document.getElementById("mensagem").textContent = "Senha incorreta. Tente novamente.";
             }
@@ -96,10 +104,12 @@
     </select>
     <div class="botoes">
         <input type="password" id="senha" placeholder="Senha de acesso">
-        <button id="entrar" onclick="verificarSenha()">Obter Entrada</button>
+        <button id="obter-entrada" onclick="verificarSenha()">Obter Entrada</button>
         <p id="mensagem"></p>
-        <a href="https://www.sssgame.com?code=426023" target="_blank"><button id="botao-cadastrar">Cadastrar</button></a>
     </div>
     <p id="entrada"></p>
+    <div class="botoes">
+        <a href="https://www.sssgame.com?code=426023" target="_blank"><button id="botao-cadastrar">Cadastrar</button></a>
+    </div>
 </body>
-</html>
+    </html>
