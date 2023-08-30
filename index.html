@@ -14,7 +14,7 @@
         #entrada {
             font-size: 24px;
             margin-top: 20px;
-            display: none; /* Inicialmente oculto */
+            display: none;
         }
         #obter-entrada {
             background-color: green;
@@ -23,7 +23,7 @@
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
-            margin-bottom: 40px; /* Maior margem inferior */
+            margin-bottom: 40px;
         }
         #botao-cadastrar {
             position: fixed;
@@ -45,31 +45,35 @@
             font-size: 16px;
             cursor: pointer;
         }
-        .redes-sociais {
-            margin-top: 40px;
-        }
-        .redes-sociais a {
-            margin: 0 10px;
-        }
         .logo {
-            margin-top: -60px; /* Ajuste a margem superior conforme necessário */
+            margin-top: -60px;
         }
         .botoes {
             margin-top: 20px;
         }
     </style>
     <script>
-        function obterEntrada() {
-            document.getElementById("entrada").style.display = "block"; // Exibe a entrada
-            document.getElementById("entrada").innerHTML = "Obtendo entrada...";
-            setTimeout(function() {
-                var entrada = Math.floor(Math.random() * 35) + 1;
-                document.getElementById("entrada").innerHTML = "Entrada: " + entrada + " vizinhos";
-            }, 5000); // 5 segundos
+        function verificarSenha() {
+            var senhaInserida = document.getElementById("senha").value;
+            var senhasAceitas = ["123456", "14725836", "97432345"]; // Adicione as senhas válidas aqui
 
-            setTimeout(function() {
-                document.getElementById("entrada").style.display = "none"; // Esconde a entrada
-            }, 20000); // 20 segundos (15s para "Aguarde" + 5s para a próxima entrada)
+            if (senhasAceitas.includes(senhaInserida)) {
+                document.getElementById("mensagem").textContent = "Obtendo entrada..."; // Exibe mensagem de obtenção
+                setTimeout(function() {
+                    document.getElementById("mensagem").textContent = ""; // Limpa a mensagem
+                    document.getElementById("entrada").style.display = "block"; // Exibe a entrada
+                    setTimeout(function() {
+                        var entrada = Math.floor(Math.random() * 35) + 1;
+                        document.getElementById("entrada").innerHTML = "Entrada: " + entrada + " vizinhos";
+                    }, 5000);
+
+                    setTimeout(function() {
+                        document.getElementById("entrada").style.display = "none"; // Esconde a entrada
+                    }, 20000);
+                }, 2000); // Espera 2 segundos antes de exibir o resultado
+            } else {
+                document.getElementById("mensagem").textContent = "Senha incorreta. Tente novamente.";
+            }
         }
     </script>
 </head>
@@ -91,7 +95,9 @@
         <option value="roleta-vip-diamante">Roleta VIP Diamante</option>
     </select>
     <div class="botoes">
-        <button id="obter-entrada" onclick="obterEntrada()">Obter Entrada</button>
+        <input type="password" id="senha" placeholder="Senha de acesso">
+        <button id="entrar" onclick="verificarSenha()">Obter Entrada</button>
+        <p id="mensagem"></p>
         <a href="https://www.sssgame.com?code=426023" target="_blank"><button id="botao-cadastrar">Cadastrar</button></a>
     </div>
     <p id="entrada"></p>
