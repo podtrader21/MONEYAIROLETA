@@ -73,11 +73,11 @@
                         var entrada = Math.floor(Math.random() * 35) + 1;
                         document.getElementById("entrada").innerHTML = "Entrada: " + entrada + " vizinhos";
                         document.getElementById("mensagem").textContent = ""; // Limpa novamente a mensagem
-                    }, 3000);
+                    }, 1000);
 
                     setTimeout(function() {
                         document.getElementById("entrada").style.display = "none"; // Esconde a entrada
-                    }, 50000);
+                    }, 10000);
                 }, 5000); // Espera 2 segundos antes de exibir o resultado
             } else {
                 document.getElementById("mensagem").textContent = "Senha incorreta. Tente novamente.";
@@ -112,4 +112,4 @@
         <a href="https://www.sssgame.com?code=426023" target="_blank"><button id="botao-cadastrar">Cadastrar</button></a>
     </div>
 </body>
-    </html>
+</html>
