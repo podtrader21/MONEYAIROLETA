@@ -115,7 +115,7 @@
                     } else {
                         mensagemResultado = "🎯Entrar na coluna 1 e 3🎯";
                     }
-                    document.getElementById("entrada").innerHTML = "Entrada: " + entrada + " e Vizinhos🎯<br>" + mensagemResultado;
+                    document.getElementById("entrada").innerHTML = "Entrada: " + entrada + " e Vizinhos <br>" + mensagemResultado;
                     document.getElementById("mensagem").textContent = "";
                     historicoEntradas.push("Entrada: " + entrada + " - " + mensagemResultado);
                     atualizarHistorico();
@@ -141,7 +141,8 @@
             botaoCompartilhar.setAttribute("data-entrada", historicoEntradas[i]);
             botaoCompartilhar.onclick = function() {
                 var entradaTexto = this.getAttribute("data-entrada");
-                var textoCompartilhamento = "�🤗Entrada confirmada�✅️ " + entradaTexto;
+                var textoCompartilhamento = "�🤗Entrada confirmada�✅️ "
+              + entradaTexto;
                 if (navigator.share) {
                     navigator.share({
                         title: "Resultado da IA Roleta",
