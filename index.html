@@ -141,7 +141,7 @@
             botaoCompartilhar.setAttribute("data-entrada", historicoEntradas[i]);
             botaoCompartilhar.onclick = function() {
                 var entradaTexto = this.getAttribute("data-entrada");
-                var textoCompartilhamento = "Entrada confirmada✅️ "
+                var textoCompartilhamento = "Entrar✅️ "
               + entradaTexto;
                 if (navigator.share) {
                     navigator.share({
@@ -173,4 +173,4 @@ function alertaEntradaAleatorio() {
     }, tempoAleatorio);
 }
 alertaEntradaAleatorio();
-            </script>
+    </script>
