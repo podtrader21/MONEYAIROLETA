@@ -141,7 +141,7 @@
             botaoCompartilhar.setAttribute("data-entrada", historicoEntradas[i]);
             botaoCompartilhar.onclick = function() {
                 var entradaTexto = this.getAttribute("data-entrada");
-                var textoCompartilhamento = "Confira meu resultado da IA Roleta: " + entradaTexto;
+                var textoCompartilhamento = "🎯Entrada confirmada🎯 " + entradaTexto;
                 if (navigator.share) {
                     navigator.share({
                         title: "Resultado da IA Roleta",
