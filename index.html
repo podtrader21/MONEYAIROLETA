@@ -109,13 +109,13 @@
                     var resultadoAleatorio = Math.floor(Math.random() * 3);
                     var mensagemResultado = "";
                     if (resultadoAleatorio === 0) {
-                        mensagemResultado = "🎯Entrar na coluna 1 e 2🎯";
+                        mensagemResultado = "🎯Entrar coluna 1 e 2🎯";
                     } else if (resultadoAleatorio === 1) {
-                        mensagemResultado = "🎯Entrar na coluna 2 e 3🎯";
+                        mensagemResultado = "🎯Entrar coluna 2 e 3🎯";
                     } else {
-                        mensagemResultado = "🎯Entrar na coluna 1 e 3🎯";
+                        mensagemResultado = "🎯Entrar coluna 1 e 3🎯";
                     }
-                    document.getElementById("entrada").innerHTML = "Entrada: " + entrada + " e Vizinhos <br>" + mensagemResultado;
+                    document.getElementById("entrada").innerHTML = "Entra: " + entrada + "Vizinhos <br>" + mensagemResultado;
                     document.getElementById("mensagem").textContent = "";
                     historicoEntradas.push("Entrada: " + entrada + " - " + mensagemResultado);
                     atualizarHistorico();
@@ -141,7 +141,7 @@
             botaoCompartilhar.setAttribute("data-entrada", historicoEntradas[i]);
             botaoCompartilhar.onclick = function() {
                 var entradaTexto = this.getAttribute("data-entrada");
-                var textoCompartilhamento = "✅️Entrada confirmada✅️ "
+                var textoCompartilhamento = "Entrada confirmada✅️ "
               + entradaTexto;
                 if (navigator.share) {
                     navigator.share({
@@ -173,4 +173,4 @@ function alertaEntradaAleatorio() {
     }, tempoAleatorio);
 }
 alertaEntradaAleatorio();
-    </script>
+            </script>
