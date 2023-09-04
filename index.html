@@ -4,7 +4,6 @@
     <title>IA roleta 3.0</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-  
         body {
             font-family: Arial, sans-serif;
             background-color: black;
@@ -59,12 +58,11 @@
             align-items: center;
             margin-top: 10px;
         }
-
         /* Ajuste o posicionamento dos botões */
         #botao-cadastrar {
             margin-bottom: 10px;
         }
-   </style>
+    </style>
 </head>
 <body>
     <div class="logo">
@@ -72,53 +70,106 @@
     </div>
     <h1>IA roleta Numeros</h1>
     <select id="roleta-select">
-        <option value="roleta-ao-vivo">Roleta ao Vivo</option>
-        <option value="mega-roleta">Mega Roleta</option>
-        <option value="roleta-relampago">Roleta Relampago</option>
-        <option value="roleta-lobby">Roleta Lobby</option>
-        <option value="roleta-imersiva">Roleta Imersiva</option>
-        <option value="roleta-rapida">Roleta Rapida</option>
-        <option value="roleta-vip">Roleta VIP</option>
-        <option value="roleta-espanhola">Roleta Espanhola</option>
-        <option value="roleta-Romenia">Roleta Romenia</option>
-        <option value="roleta-vip-diamante">Roleta VIP Diamante</option>
+        <option value="roleta-Turksh-roluette">Turksh roulette</option>
+        <option value="mega-roleta">Mega Roulette</option>
+        <option value="roleta-relampago">Diamond roulette</option>
+        <option value="roleta-lobby">Ez dealer roulette</option>
+        <option value="roleta-imersiva">Italia roulette</option>
+        <option value="roleta-rapida">Neon roulette</option>
+        <option value="roleta-vip">Namaste rolette</option>
+        <option value="roleta-espanhola">Ruby roulette</option>
+        <option value="roleta-Romenia">Azure roulette</option>
+        <option value="roleta-vip-diamante">Espanhol roulette</option>
     </select>
     <div class="botoes">
         <input type="password" id="senha" placeholder="Senha de acesso">
         <button id="obter-entrada" onclick="verificarSenha()">Obter Entrada</button>
         <p id="mensagem"></p>
     </div>
-    <p id="entrada"></p><div class="botoes">
-    <a href="https://drive.google.com/file/d/1hqYUde2CzWrIk1q3MBLpBqa0NMCZu4QI/view?usp=drivesdk" target="_blank">
-        <button id="botao-video-aula" style="background-color: red;">Vídeo Aula</button>
-        <a href="https://www.sssgame.com?code=426023" target="_blank"><button id="botao-cadastrar">Cadastrar</button></a>
+    <p id="entrada"></p>
+    <div class="botoes">
+    <div id="historico" style="margin-top: 20px;">
+        <h2>Histórico de Entradas</h2>
+        <ul id="lista-entradas"></ul>
+        <button onclick="limparHistorico()">Limpar Histórico</button>
     </div>
-    
-    
     <!-- Script para verificar a senha e exibir entrada -->
     <script>
-        function verificarSenha() {
-            var senhaInserida = document.getElementById("senha").value;
-            var senhasAceitas = ["123456", "14725836", "97432345"]; // Adicione as senhas válidas aqui
-
-            if (senhasAceitas.includes(senhaInserida)) {
-                document.getElementById("mensagem").textContent = "Obtendo entrada...";
+    var historicoEntradas = [];
+    function verificarSenha() {
+        var senhaInserida = document.getElementById("senha").value;
+        var senhasAceitas = ["123456", "14725836", "97432345"];
+        if (senhasAceitas.includes(senhaInserida)) {
+            document.getElementById("mensagem").textContent = "Obtendo entrada...";
+            setTimeout(function() {
+                document.getElementById("mensagem").textContent = "";
+                document.getElementById("entrada").style.display = "block";
                 setTimeout(function() {
+                    var entrada = Math.floor(Math.random() * 35) + 1;
+                    var resultadoAleatorio = Math.floor(Math.random() * 3);
+                    var mensagemResultado = "";
+                    if (resultadoAleatorio === 0) {
+                        mensagemResultado = "Entrar na coluna 1 e 2";
+                    } else if (resultadoAleatorio === 1) {
+                        mensagemResultado = "Entrar na coluna 2 e 3";
+                    } else {
+                        mensagemResultado = "Entrar na coluna 1 e 3";
+                    }
+                    document.getElementById("entrada").innerHTML = "Entrada: " + entrada + " e Vizinhos🎯<br>" + mensagemResultado;
                     document.getElementById("mensagem").textContent = "";
-                    document.getElementById("entrada").style.display = "block";
-                    setTimeout(function() {
-                        var entrada = Math.floor(Math.random() * 35) + 1;
-                        document.getElementById("entrada").innerHTML = "Entrada: " + entrada + " e Vizinhos🎯";
-                        document.getElementById("mensagem").textContent = "";
-                    }, 1000);
-
-                    setTimeout(function() {
-                        document.getElementById("entrada").style.display = "none";
-                    }, 10000);
-                }, 5000);
-            } else {
-                document.getElementById("mensagem").textContent = "Senha incorreta. Tente novamente.";
-            }
+                    historicoEntradas.push("Entrada: " + entrada + " - " + mensagemResultado);
+                    atualizarHistorico();
+                }, 1000);
+                setTimeout(function() {
+                    document.getElementById("entrada").style.display = "none";
+                }, 10000);
+            }, 5000);
+        } else {
+            document.getElementById("mensagem").textContent = "Senha incorreta. Tente novamente.";
         }
+    }
+    function atualizarHistorico() {
+        var listaEntradas = document.getElementById("lista-entradas");
+        listaEntradas.innerHTML = "";
+        for (var i = 0; i < historicoEntradas.length; i++) {
+            var entradaItem = document.createElement("li");
+            entradaItem.textContent = historicoEntradas[i];
+            // Adicione um botão "Compartilhar Resultado" para cada entrada
+            var botaoCompartilhar = document.createElement("button");
+            botaoCompartilhar.textContent = "Compartilhar Resultado";
+            // Armazene o texto da entrada no atributo data-entrada
+            botaoCompartilhar.setAttribute("data-entrada", historicoEntradas[i]);
+            botaoCompartilhar.onclick = function() {
+                var entradaTexto = this.getAttribute("data-entrada");
+                var textoCompartilhamento = "Confira meu resultado da IA Roleta: " + entradaTexto;
+                if (navigator.share) {
+                    navigator.share({
+                        title: "Resultado da IA Roleta",
+                        text: textoCompartilhamento,
+                        url: window.location.href
+                    }).then(function() {
+                        console.log("Resultado compartilhado com sucesso!");
+                    }).catch(function(error) {
+                        console.error("Erro ao compartilhar resultado:", error);
+                    });
+                } else {
+                    alert("Seu navegador não suporta a função de compartilhamento.");
+                }
+            };
+            entradaItem.appendChild(botaoCompartilhar);
+            listaEntradas.appendChild(entradaItem);
+        }
+    }
+      function limparHistorico() {
+    historicoEntradas = [];
+    atualizarHistorico();
+}
+function alertaEntradaAleatorio() {
+    var tempoAleatorio = Math.floor(Math.random() * (100000 - 20000)) + 120000;
+    setTimeout(function() {
+        alert("Possível entrada! Verifique a roleta.");
+        alertaEntradaAleatorio();
+    }, tempoAleatorio);
+}
+alertaEntradaAleatorio();
     </script>
-  
