@@ -141,13 +141,11 @@
             botaoCompartilhar.setAttribute("data-entrada", historicoEntradas[i]);
             botaoCompartilhar.onclick = function() {
                 var entradaTexto = this.getAttribute("data-entrada");
-                var textoCompartilhamento = "Entrar✅️ "
-              + entradaTexto;
+                var textoCompartilhamento = "Entrar✅ " + entradaTexto;
                 if (navigator.share) {
                     navigator.share({
                         title: "Resultado da IA Roleta",
                         text: textoCompartilhamento,
-                        url: window.location.href
                     }).then(function() {
                         console.log("Resultado compartilhado com sucesso!");
                     }).catch(function(error) {
