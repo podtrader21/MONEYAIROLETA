@@ -136,24 +136,26 @@
             entradaItem.textContent = historicoEntradas[i];
             // Adicione um botão "Compartilhar Resultado" para cada entrada
             var botaoCompartilhar = document.createElement("button");
-            botaoCompartilhar.textContent = "Compartilhar Resultado";
+            botaoCompartilhar.textContent = "Compartilhar";
             // Armazene o texto da entrada no atributo data-entrada
             botaoCompartilhar.setAttribute("data-entrada", historicoEntradas[i]);
             botaoCompartilhar.onclick = function() {
-                var entradaTexto = this.getAttribute("data-entrada");
-                var textoCompartilhamento = "Entrar✅ "
-              + entradaTexto;
-                if (navigator.share) {
-                    navigator.share({
-                        title: "Resultado da IA Roleta",
-                        text: textoCompartilhamento,
-                    }).then(function() {
-                        console.log("Resultado compartilhado com sucesso!");
-                    }).catch(function(error) {
-                        console.error("Erro ao compartilhar resultado:", error);
-                    });
-                } else {
-                    alert("Seu navegador não suporta a função de compartilhamento.");
+        var entradaTexto = this.getAttribute("data-entrada");
+        
+        // Adicione a mensagem específica e o link de cadastro
+        var mensagemCompartilhamento = "Entrada✅ " + entradaTexto + "\nCadastre-se aqui: https://exclusiva.bet/cadastro?afiliado=14725836";
+
+        if (navigator.share) {
+            navigator.share({
+                title: "Resultado da IA Roleta",
+                text: mensagemCompartilhamento,
+            }).then(function() {
+                console.log("Resultado compartilhado com sucesso!");
+            }).catch(function(error) {
+                console.error("Erro ao compartilhar resultado:", error);
+            });
+        } else {
+            alert("Seu navegador não suporta a função de compartilhamento");
                 }
             };
             entradaItem.appendChild(botaoCompartilhar);
