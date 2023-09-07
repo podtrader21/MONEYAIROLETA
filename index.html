@@ -29,18 +29,6 @@
             cursor: pointer;
             margin-top: 20px;
         }
-        #botao-cadastrar {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #333;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
         #roleta-select {
             color: white;
             background-color: #333;
@@ -58,6 +46,18 @@
             align-items: center;
             margin-top: 10px;
         }
+        #botao-cadastrar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
         /* Ajuste o posicionamento dos botões */
         #botao-cadastrar {
             margin-bottom: 10px;
@@ -69,7 +69,9 @@
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz5PQpt8fn_hrie2m3NUYGXoDjtqwn8wWwzQ&usqp=CAU" alt="Logo" width="150">
     </div>
     <h1>IA roleta Numeros</h1>
-    <select id="roleta-select">
+    <select id="roleta-select" onchange="atualizarRoletaSelecionada()">
+        <option value="roleta-Turksh-roluette">Turksh Executiva bet</option>
+        <option value="mega-roleta">Mega Executiva bet</option>
         <option value="roleta-Turksh-roluette">Turksh Executiva bet</option>
         <option value="mega-roleta">Mega Executiva bet</option>
         <option value="roleta-relampago">Diamond Executiva bet</option>
@@ -105,7 +107,7 @@
         <option value="roleta-lightning">lightning 9fgame</option>
         <option value="roleta-xxxtremelightning">Xxxtremelightning 9fgame</option>
         <option value="roleta-auto">Auto roulette 9fgame</option>
-       
+       <!-- Adicione outras opções de roleta aqui... -->
     </select>
     <div class="botoes">
         <input type="password" id="senha" placeholder="Senha de acesso">
@@ -119,85 +121,90 @@
         <ul id="lista-entradas"></ul>
         <button onclick="limparHistorico()">Limpar Histórico</button>
     </div>
-    <!-- Script para verificar a senha e exibir entrada -->
+    <!-- Script JavaScript... -->
     <script>
-    var historicoEntradas = [];
-    function verificarSenha() {
-        var senhaInserida = document.getElementById("senha").value;
-        var senhasAceitas = ["123456", "14725836", "97432345"];
-        if (senhasAceitas.includes(senhaInserida)) {
-            document.getElementById("mensagem").textContent = "Obtendo entrada...";
-            setTimeout(function() {
-                document.getElementById("mensagem").textContent = "";
-                document.getElementById("entrada").style.display = "block";
-                setTimeout(function() {
-                    var entrada = Math.floor(Math.random() * 35) + 1;
-                    var resultadoAleatorio = Math.floor(Math.random() * 3);
-                    var mensagemResultado = "";
-                    if (resultadoAleatorio === 0) {
-                        mensagemResultado = "🎯Entrar coluna 1 e 2🎯";
-                    } else if (resultadoAleatorio === 1) {
-                        mensagemResultado = "🎯Entrar coluna 2 e 3🎯";
-                    } else {
-                        mensagemResultado = "🎯Entrar coluna 1 e 3🎯";
-                    }
-                    document.getElementById("entrada").innerHTML = "Entra: " + entrada + "Vizinhos <br>" + mensagemResultado;
-                    document.getElementById("mensagem").textContent = "";
-                    historicoEntradas.push("Entrada: " + entrada + " - " + mensagemResultado);
-                    atualizarHistorico();
-                }, 1000);
-                setTimeout(function() {
-                    document.getElementById("entrada").style.display = "none";
-                }, 10000);
-            }, 5000);
-        } else {
-            document.getElementById("mensagem").textContent = "Senha incorreta. Tente novamente.";
-        }
-    }
-    function atualizarHistorico() {
-        var listaEntradas = document.getElementById("lista-entradas");
-        listaEntradas.innerHTML = "";
-        for (var i = 0; i < historicoEntradas.length; i++) {
-            var entradaItem = document.createElement("li");
-            entradaItem.textContent = historicoEntradas[i];
-            // Adicione um botão "Compartilhar Resultado" para cada entrada
-            var botaoCompartilhar = document.createElement("button");
-            botaoCompartilhar.textContent = "Compartilhar";
-            // Armazene o texto da entrada no atributo data-entrada
-            botaoCompartilhar.setAttribute("data-entrada", historicoEntradas[i]);
-            botaoCompartilhar.onclick = function() {
-        var entradaTexto = this.getAttribute("data-entrada");
-        
-        // Adicione a mensagem específica e o link de cadastro
-        var mensagemCompartilhamento = "confirmado✅ " + entradaTexto + "\nCadastre-se aqui: https://exclusiva.bet/cadastro?afiliado=14725836";
+        var historicoEntradas = [];
+        var roletaSelecionada = ""; // Variável para armazenar a roleta selecionada
 
-        if (navigator.share) {
-            navigator.share({
-                title: "Resultado da IA Roleta",
-                text: mensagemCompartilhamento,
-            }).then(function() {
-                console.log("Resultado compartilhado com sucesso!");
-            }).catch(function(error) {
-                console.error("Erro ao compartilhar resultado:", error);
-            });
-        } else {
-            alert("Seu navegador não suporta a função de compartilhamento");
-                }
-            };
-            entradaItem.appendChild(botaoCompartilhar);
-            listaEntradas.appendChild(entradaItem);
+        function atualizarRoletaSelecionada() {
+            var select = document.getElementById("roleta-select");
+            roletaSelecionada = select.options[select.selectedIndex].text;
         }
-    }
+
+        function verificarSenha() {
+            var senhaInserida = document.getElementById("senha").value;
+            var senhasAceitas = ["123456", "14725836", "97432345"];
+            if (senhasAceitas.includes(senhaInserida)) {
+                document.getElementById("mensagem").textContent = "Obtendo entrada...";
+                setTimeout(function() {
+                    document.getElementById("mensagem").textContent = "";
+                    document.getElementById("entrada").style.display = "block";
+                    setTimeout(function() {
+                        var entrada = Math.floor(Math.random() * 35) + 1;
+                        var resultadoAleatorio = Math.floor(Math.random() * 3);
+                        var mensagemResultado = "";
+                        if (resultadoAleatorio === 0) {
+                            mensagemResultado = "🎯Entrar coluna 1 e 2🎯";
+                        } else if (resultadoAleatorio === 1) {
+                            mensagemResultado = "🎯Entrar coluna 2 e 3🎯";
+                        } else {
+                            mensagemResultado = "🎯Entrar coluna 1 e 3🎯";
+                        }
+                        document.getElementById("entrada").innerHTML = "Entra: " + entrada + "Vizinhos <br>" + mensagemResultado;
+                        document.getElementById("mensagem").textContent = "";
+                        historicoEntradas.push("Entrada: " + entrada + " - " + mensagemResultado + " na roleta " + roletaSelecionada); // Inclui o nome da roleta
+                        atualizarHistorico();
+                    }, 1000);
+                    setTimeout(function() {
+                        document.getElementById("entrada").style.display = "none";
+                    }, 10000);
+                }, 5000);
+            } else {
+                document.getElementById("mensagem").textContent = "Senha incorreta. Tente novamente.";
+            }
+        }
+
+        function atualizarHistorico() {
+            var listaEntradas = document.getElementById("lista-entradas");
+            listaEntradas.innerHTML = "";
+            for (var i = 0; i < historicoEntradas.length; i++) {
+                var entradaItem = document.createElement("li");
+                entradaItem.textContent = historicoEntradas[i];
+                // Adicione um botão "Compartilhar Resultado" para cada entrada
+                var botaoCompartilhar = document.createElement("button");
+                botaoCompartilhar.textContent = "Compartilhar";
+                // Armazene o texto da entrada no atributo data-entrada
+                botaoCompartilhar.setAttribute("data-entrada", historicoEntradas[i]);
+                botaoCompartilhar.onclick = function() {
+                    var entradaTexto = this.getAttribute("data-entrada");
+                    // Adicione a mensagem específica e o link de cadastro
+                    var mensagemCompartilhamento = "confirmado✅ " + entradaTexto + "\nCadastre-se aqui: https://exclusiva.bet/cadastro?afiliado=14725836";
+                    if (navigator.share) {
+                        navigator.share({
+                            title: "Resultado da IA Roleta",
+                            text: mensagemCompartilhamento,
+                        }).then(function() {
+                            console.log("Resultado compartilhado com sucesso!");
+                        }).catch(function(error) {
+                            console.error("Erro ao compartilhar resultado:", error);
+                        });
+                    } else {
+                        alert("Seu navegador não suporta a função de compartilhamento");
+                    }
+                };
+                entradaItem.appendChild(botaoCompartilhar);
+                listaEntradas.appendChild(entradaItem);}}
       function limparHistorico() {
-    historicoEntradas = [];
-    atualizarHistorico();
-}
-function alertaEntradaAleatorio() {
-    var tempoAleatorio = Math.floor(Math.random() * (100000 - 20000)) + 120000;
-    setTimeout(function() {
-        alert("Possível entrada! Verifique a roleta.");
-        alertaEntradaAleatorio();
-    }, tempoAleatorio);
-}
-alertaEntradaAleatorio();
+        historicoEntradas = [];
+        atualizarHistorico();
+    }
+
+    function alertaEntradaAleatorio() {
+        var tempoAleatorio = Math.floor(Math.random() * (100000 - 20000)) + 120000;
+        setTimeout(function() {
+            alert("Possível entrada! Verifique a roleta.");
+            alertaEntradaAleatorio();
+        }, tempoAleatorio);
+    }
+    alertaEntradaAleatorio();
     </script>
